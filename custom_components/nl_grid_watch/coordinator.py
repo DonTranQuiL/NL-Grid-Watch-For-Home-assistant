@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta
+import logging
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
@@ -27,6 +28,8 @@ from .const import (
     SOLAR_HIGH,
     SOLAR_LOW,
 )
+
+_LOGGER = logging.getLogger(__name__)
 
 TIGHT = {"investigation", "queue"}
 WATCH = {"limited", "investigation", "queue"}
@@ -117,6 +120,7 @@ class NLGridWatchCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         interval = entry.options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
         super().__init__(
             hass,
+            _LOGGER,
             name=DOMAIN,
             update_interval=timedelta(minutes=interval),
             config_entry=entry,
