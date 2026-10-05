@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from homeassistant.components.binary_sensor import BinarySensorDeviceClass, BinarySensorEntity
+from homeassistant.components.binary_sensor import (
+    BinarySensorDeviceClass,
+    BinarySensorEntity,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -22,7 +25,9 @@ async def async_setup_entry(
     async_add_entities([NLGridWatchStressSensor(entry.runtime_data, entry)])
 
 
-class NLGridWatchStressSensor(CoordinatorEntity[NLGridWatchCoordinator], BinarySensorEntity):
+class NLGridWatchStressSensor(
+    CoordinatorEntity[NLGridWatchCoordinator], BinarySensorEntity
+):
     """On when either forecast window is high."""
 
     _attr_has_entity_name = True

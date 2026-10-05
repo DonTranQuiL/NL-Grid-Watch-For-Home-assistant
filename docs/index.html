@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL Grid Watch | Home Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } } }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#0B1120] text-slate-200 font-sans selection:bg-amber-500/30 overflow-x-hidden">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0B1120]/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="https://dontranquil.github.io/" class="flex items-center gap-2 text-white font-bold text-xl tracking-wide">
+                <i data-lucide="zap" class="text-amber-400 w-6 h-6"></i>
+                NL Grid <span class="text-amber-400 font-light">Watch</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-400">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#entities" class="hover:text-white transition-colors">Entities</a>
+                <a href="#installation" class="hover:text-white transition-colors">Install</a>
+                <a href="https://discord.gg/qaHPTTKHae" target="_blank" class="hover:text-white transition-colors">Discord</a>
+                <a href="https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant" target="_blank" class="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-full transition-all">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-28 overflow-hidden">
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/30 border border-amber-500/30 text-amber-300 text-sm font-medium mb-6">
+                Dutch grid stress forecast
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">Backfeed by day.<br>Evening peak by night.</h1>
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10">A Home Assistant integration that turns a Dutch postcode into a local overload forecast from the capaciteitskaart and Open-Meteo weather — not a cable-fault promise.</p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#installation" class="px-6 py-3 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-semibold">Install with HACS</a>
+                <a href="https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/releases" class="px-6 py-3 rounded-full border border-slate-600 text-slate-200 hover:border-slate-400">Latest release</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">What it forecasts</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Two directions on the same street cable. High risk means windows like this are when areas like yours get inverter trips or local overload.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/30 p-6">
+                    <i data-lucide="sun" class="text-amber-400 w-7 h-7 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Backfeed</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Teruglevering already tight, and the next midday is clear. Typical result is an inverter trip; a real outage is the failure case.</p>
+                </div>
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/30 p-6">
+                    <i data-lucide="moon" class="text-amber-400 w-7 h-7 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Evening peak</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Afname already tight, and the coming evening is dark and cold. The 16:00–21:00 window: cooking, heat pumps, EV chargers.</p>
+                </div>
+                <div class="rounded-2xl border border-slate-700/60 bg-slate-800/30 p-6">
+                    <i data-lucide="shield" class="text-amber-400 w-7 h-7 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Last-good data</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">A failed poll keeps the last snapshot on screen. Optional energieonderbrekingen interruptions when you have a token.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="entities" class="py-20 bg-slate-900/40 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Entities you get</h2>
+                <p class="text-slate-400 mb-6">Status sensors for afname and teruglevering, risk levels with windows in the attributes, and a binary sensor that flips when either risk is high.</p>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-emerald-400"></span> available</li>
+                    <li class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-amber-400"></span> limited</li>
+                    <li class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-orange-500"></span> investigation</li>
+                    <li class="flex items-center gap-3"><span class="w-3 h-3 rounded-full bg-red-500"></span> queue</li>
+                </ul>
+            </div>
+            <div class="rounded-2xl border border-slate-700 bg-[#0d1326] p-6">
+                <p class="text-xs font-mono text-slate-500 mb-3">Sources</p>
+                <dl class="space-y-3 text-sm">
+                    <div class="flex justify-between gap-4 border-b border-slate-800 pb-3"><dt class="text-slate-400">PDOK</dt><dd class="text-white">postcode → coordinate</dd></div>
+                    <div class="flex justify-between gap-4 border-b border-slate-800 pb-3"><dt class="text-slate-400">Capaciteitskaart</dt><dd class="text-white">afname / teruglevering</dd></div>
+                    <div class="flex justify-between gap-4 border-b border-slate-800 pb-3"><dt class="text-slate-400">Open-Meteo</dt><dd class="text-white">irradiance, cloud, temp</dd></div>
+                    <div class="flex justify-between gap-4"><dt class="text-slate-400">energieonderbrekingen</dt><dd class="text-white">optional</dd></div>
+                </dl>
+            </div>
+        </div>
+    </section>
+
+    <section id="installation" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Installation</h2>
+                <p class="text-slate-400">HACS custom repository, then a restart.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="rounded-2xl border border-slate-700/50 bg-slate-800/30 p-8">
+                    <h3 class="text-2xl font-bold text-white mb-6">HACS</h3>
+                    <ol class="space-y-4 text-sm text-slate-300">
+                        <li>1. HACS, Integrations, then the menu, Custom repositories.</li>
+                        <li>2. URL <code class="text-amber-300">https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant</code></li>
+                        <li>3. Category Integration, then Add.</li>
+                        <li>4. Download NL Grid Watch and restart Home Assistant.</li>
+                        <li>5. Settings, Devices and services, Add integration, NL Grid Watch, enter your postcode.</li>
+                    </ol>
+                </div>
+                <div class="rounded-2xl border border-amber-500/30 bg-amber-900/10 p-8">
+                    <h3 class="text-xl font-bold text-white mb-3">Blueprint</h3>
+                    <p class="text-sm text-slate-300 mb-4">Import <code class="text-amber-300">blueprints/automation/grid_stress_notify.yaml</code> to get a ready-made notification when stress is expected.</p>
+                    <p class="text-sm text-slate-400">Service <code class="text-amber-300">nl_grid_watch.refresh</code> forces an immediate poll.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#050810] border-t border-slate-800 py-12 text-sm text-slate-500">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+            <div>
+                <div class="flex items-center gap-2 text-slate-300 font-bold text-lg mb-3">
+                    <i data-lucide="zap" class="text-amber-400 w-5 h-5"></i> NL Grid Watch
+                </div>
+                <p class="max-w-md mb-3">Created and maintained for DonTranQuiL. Unofficial. Not affiliated with Netbeheer Nederland, TenneT or energieonderbrekingen.nl.</p>
+                <p>Capaciteitskaart data &copy; Netbeheer Nederland / TenneT.</p>
+            </div>
+            <div class="md:text-right space-y-2">
+                <p><a class="hover:text-white" href="https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant">Repository</a></p>
+                <p><a class="hover:text-white" href="https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/issues">Issues</a></p>
+                <p><a class="hover:text-white" href="https://discord.gg/qaHPTTKHae">Discord</a></p>
+                <p><a class="hover:text-white" href="https://ko-fi.com/DonTranQuiL">Ko-fi</a></p>
+                <p><a class="hover:text-white" href="https://dontranquil.github.io/">All integrations</a></p>
+                <p class="pt-2">MIT</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => { if (window.lucide) lucide.createIcons(); });
+    </script>
+</body>
+</html>

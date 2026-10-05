@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
 import logging
+from datetime import datetime, timedelta
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
@@ -57,10 +57,16 @@ def _window(rows: list[dict[str, Any]]) -> dict[str, Any] | None:
     }
 
 
-def score_risk(capacity: dict[str, Any], forecast: list[dict[str, Any]]) -> dict[str, Any]:
+def score_risk(
+    capacity: dict[str, Any], forecast: list[dict[str, Any]]
+) -> dict[str, Any]:
     """Score backfeed and evening-peak risk from area colour and weather."""
     now = dt_util.now()
-    future = [row for row in forecast if _parse_local(row["time"]) >= now - timedelta(minutes=30)]
+    future = [
+        row
+        for row in forecast
+        if _parse_local(row["time"]) >= now - timedelta(minutes=30)
+    ]
     afname = (capacity.get("afname") or {}).get("status", "unknown")
     terug = (capacity.get("teruglevering") or {}).get("status", "unknown")
 
@@ -102,7 +108,13 @@ def score_risk(capacity: dict[str, Any], forecast: list[dict[str, Any]]) -> dict
     else:
         evening = "none"
 
-    active = "backfeed" if backfeed == "high" else "evening_peak" if evening == "high" else "none"
+    active = (
+        "backfeed"
+        if backfeed == "high"
+        else "evening_peak"
+        if evening == "high"
+        else "none"
+    )
     return {
         "backfeed_risk": backfeed,
         "evening_peak_risk": evening,
@@ -149,8 +161,12 @@ class NLGridWatchCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         """Fetch all sources and score the next windows."""
         try:
             place = await self.api.async_geocode(self.postal_code)
-            capacity = await self.api.async_capacity(place["latitude"], place["longitude"])
-            forecast = await self.api.async_forecast(place["latitude"], place["longitude"])
+            capacity = await self.api.async_capacity(
+                place["latitude"], place["longitude"]
+            )
+            forecast = await self.api.async_forecast(
+                place["latitude"], place["longitude"]
+            )
             disruptions: dict[str, Any] = {"enabled": False, "items": [], "error": None}
             client_id = self.entry.data.get(CONF_CLIENT_ID, "")
             client_secret = self.entry.data.get(CONF_CLIENT_SECRET, "")

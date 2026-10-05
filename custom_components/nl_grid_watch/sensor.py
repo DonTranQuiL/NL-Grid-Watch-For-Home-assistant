@@ -4,7 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from homeassistant.components.sensor import RestoreSensor, SensorDeviceClass, SensorEntity, SensorEntityDescription
+from homeassistant.components.sensor import (
+    RestoreSensor,
+    SensorDeviceClass,
+    SensorEntity,
+    SensorEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
@@ -15,17 +20,36 @@ from .const import DOMAIN, VERSION
 from .coordinator import NLGridWatchCoordinator
 
 SENSORS: tuple[SensorEntityDescription, ...] = (
-    SensorEntityDescription(key="afname", translation_key="afname", icon="mdi:transmission-tower"),
-    SensorEntityDescription(key="teruglevering", translation_key="teruglevering", icon="mdi:solar-power"),
-    SensorEntityDescription(key="backfeed_risk", translation_key="backfeed_risk", icon="mdi:white-balance-sunny"),
-    SensorEntityDescription(key="evening_peak_risk", translation_key="evening_peak_risk", icon="mdi:weather-night"),
-    SensorEntityDescription(key="interruption", translation_key="interruption", icon="mdi:flash-off"),
+    SensorEntityDescription(
+        key="afname", translation_key="afname", icon="mdi:transmission-tower"
+    ),
+    SensorEntityDescription(
+        key="teruglevering", translation_key="teruglevering", icon="mdi:solar-power"
+    ),
+    SensorEntityDescription(
+        key="backfeed_risk",
+        translation_key="backfeed_risk",
+        icon="mdi:white-balance-sunny",
+    ),
+    SensorEntityDescription(
+        key="evening_peak_risk",
+        translation_key="evening_peak_risk",
+        icon="mdi:weather-night",
+    ),
+    SensorEntityDescription(
+        key="interruption", translation_key="interruption", icon="mdi:flash-off"
+    ),
 )
 
 DIAGNOSTICS: tuple[tuple[str, str, str, SensorDeviceClass | None], ...] = (
     ("consecutive_errors", "Consecutive errors", "mdi:alert-circle-outline", None),
     ("last_update_status", "Last update status", "mdi:cloud-check-outline", None),
-    ("last_update_time", "Last update time", "mdi:clock-outline", SensorDeviceClass.TIMESTAMP),
+    (
+        "last_update_time",
+        "Last update time",
+        "mdi:clock-outline",
+        SensorDeviceClass.TIMESTAMP,
+    ),
 )
 
 
@@ -117,7 +141,9 @@ class NLGridWatchSensor(CoordinatorEntity[NLGridWatchCoordinator], RestoreSensor
         }
 
 
-class NLGridWatchDiagnosticSensor(CoordinatorEntity[NLGridWatchCoordinator], SensorEntity):
+class NLGridWatchDiagnosticSensor(
+    CoordinatorEntity[NLGridWatchCoordinator], SensorEntity
+):
     """Diagnostic health sensors, same block as SkyRadar Fusion."""
 
     _attr_has_entity_name = True

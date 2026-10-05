@@ -91,7 +91,9 @@ class NLGridWatchApi:
             }
         return result
 
-    async def async_forecast(self, latitude: float, longitude: float) -> list[dict[str, Any]]:
+    async def async_forecast(
+        self, latitude: float, longitude: float
+    ) -> list[dict[str, Any]]:
         """Return hourly weather for the next two days."""
         async with self._session.get(
             OPEN_METEO_URL,
@@ -156,5 +158,9 @@ class NLGridWatchApi:
         ) as response:
             response.raise_for_status()
             payload = await response.json()
-        items = payload if isinstance(payload, list) else payload.get("data") or payload.get("items") or []
+        items = (
+            payload
+            if isinstance(payload, list)
+            else payload.get("data") or payload.get("items") or []
+        )
         return {"enabled": True, "items": items}

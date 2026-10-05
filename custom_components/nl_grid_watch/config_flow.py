@@ -6,8 +6,12 @@ import re
 from typing import Any
 
 import voluptuous as vol
-
-from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResult, OptionsFlow
+from homeassistant.config_entries import (
+    ConfigEntry,
+    ConfigFlow,
+    ConfigFlowResult,
+    OptionsFlow,
+)
 from homeassistant.core import callback
 
 from .const import (
@@ -33,7 +37,9 @@ class NLGridWatchConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
-    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
         """Ask for the postcode and optional interruption credentials."""
         errors: dict[str, str] = {}
         if user_input is not None:
@@ -75,7 +81,9 @@ class NLGridWatchConfigFlow(ConfigFlow, domain=DOMAIN):
 class NLGridWatchOptionsFlow(OptionsFlow):
     """Change scan interval and optional API credentials."""
 
-    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
         """Show options."""
         if user_input is not None:
             data = dict(self.config_entry.data)
@@ -97,8 +105,12 @@ class NLGridWatchOptionsFlow(OptionsFlow):
                         CONF_SCAN_INTERVAL,
                         default=options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
                     ): vol.All(vol.Coerce(int), vol.Range(min=15, max=180)),
-                    vol.Optional(CONF_CLIENT_ID, default=data.get(CONF_CLIENT_ID, "")): str,
-                    vol.Optional(CONF_CLIENT_SECRET, default=data.get(CONF_CLIENT_SECRET, "")): str,
+                    vol.Optional(
+                        CONF_CLIENT_ID, default=data.get(CONF_CLIENT_ID, "")
+                    ): str,
+                    vol.Optional(
+                        CONF_CLIENT_SECRET, default=data.get(CONF_CLIENT_SECRET, "")
+                    ): str,
                 }
             ),
         )
