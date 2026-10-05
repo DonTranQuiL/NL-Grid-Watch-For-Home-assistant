@@ -1,0 +1,3 @@
+refresh:
+  name: Refresh
+  description: Fetch capaciteitskaart, weather and optional interruption data now.
