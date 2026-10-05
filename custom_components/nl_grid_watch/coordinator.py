@@ -8,6 +8,7 @@ from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.storage import Store
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.util import dt as dt_util
 
@@ -128,6 +129,21 @@ class NLGridWatchCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self.entry = entry
         self.api = NLGridWatchApi(hass)
         self.postal_code = entry.data[CONF_POSTAL_CODE]
+        self.consecutive_errors = 0
+        self.last_update_status = "pending"
+        self.last_update_time = None
+        self.store = Store(hass, 1, f"{DOMAIN}_state_{entry.entry_id}")
+        self._persisted: dict[str, Any] | None = None
+
+    async def async_load_persisted(self) -> None:
+        """Load the last good snapshot from .storage."""
+        stored = await self.store.async_load()
+        if not stored:
+            return
+        self._persisted = stored
+        self.data = stored
+        self.last_update_status = "restored"
+        self.last_update_time = stored.get("saved_at")
 
     async def _async_update_data(self) -> dict[str, Any]:
         """Fetch all sources and score the next windows."""
@@ -146,15 +162,27 @@ class NLGridWatchCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                     disruptions["error"] = None
                 except Exception as err:  # noqa: BLE001 - keep the forecast if the extra feed fails
                     disruptions = {"enabled": True, "items": [], "error": str(err)}
+            payload = {
+                "place": place,
+                "capacity": capacity,
+                "forecast": forecast[:48],
+                "disruptions": disruptions,
+                "risk": score_risk(capacity, forecast),
+                "name": NAME,
+                "saved_at": dt_util.utcnow().isoformat(),
+            }
         except Exception as err:
+            self.consecutive_errors += 1
+            self.last_update_status = "failed"
+            self.last_update_time = dt_util.utcnow()
+            if self.data:
+                return self.data
+            if self._persisted:
+                return self._persisted
             raise UpdateFailed(str(err)) from err
 
-        risk = score_risk(capacity, forecast)
-        return {
-            "place": place,
-            "capacity": capacity,
-            "forecast": forecast[:48],
-            "disruptions": disruptions,
-            "risk": risk,
-            "name": NAME,
-        }
+        self.consecutive_errors = 0
+        self.last_update_status = "ok"
+        self.last_update_time = dt_util.utcnow()
+        await self.store.async_save(payload)
+        return payload
