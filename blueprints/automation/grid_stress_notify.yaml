@@ -1,0 +1,29 @@
+blueprint:
+  name: NL Grid Watch stress alert
+  description: Notify when backfeed or evening-peak risk becomes high.
+  domain: automation
+  input:
+    stress_sensor:
+      name: Stress expected
+      selector:
+        entity:
+          domain: binary_sensor
+    notify_service:
+      name: Notify service
+      default: notify.notify
+      selector:
+        text:
+trigger:
+  - platform: state
+    entity_id: !input stress_sensor
+    to: "on"
+action:
+  - service: !input notify_service
+    data:
+      title: "NL Grid Watch"
+      message: >-
+        Grid stress expected.
+        Window {{ state_attr(trigger.entity_id, 'active_window') }}.
+        Backfeed {{ state_attr(trigger.entity_id, 'backfeed_risk') }},
+        evening peak {{ state_attr(trigger.entity_id, 'evening_peak_risk') }}.
+mode: single
