@@ -3,6 +3,7 @@
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.exceptions import ConfigEntryNotReady
 
 from .const import DOMAIN, PLATFORMS
 from .coordinator import NLGridWatchCoordinator
@@ -13,7 +14,12 @@ type NLGridWatchConfigEntry = ConfigEntry[NLGridWatchCoordinator]
 async def async_setup_entry(hass: HomeAssistant, entry: NLGridWatchConfigEntry) -> bool:
     """Set up NL Grid Watch from a config entry."""
     coordinator = NLGridWatchCoordinator(hass, entry)
-    await coordinator.async_config_entry_first_refresh()
+    await coordinator.async_load_persisted()
+    try:
+        await coordinator.async_config_entry_first_refresh()
+    except ConfigEntryNotReady:
+        if not coordinator.data:
+            raise
     entry.runtime_data = coordinator
 
     async def handle_refresh(call: ServiceCall) -> None:
