@@ -1,0 +1,42 @@
+{
+  "config": {
+    "error": {
+      "invalid_postal_code": "Vul een Nederlandse postcode in, bijvoorbeeld 1012JS."
+    },
+    "step": {
+      "user": {
+        "title": "NL Grid Watch",
+        "description": "Voorspelt teruglever- en avondpiekstress voor een postcode. De energieonderbrekingen-token is optioneel.",
+        "data": {
+          "postal_code": "Postcode",
+          "client_id": "energieonderbrekingen client id (optioneel)",
+          "client_secret": "energieonderbrekingen client secret (optioneel)"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "NL Grid Watch opties",
+        "data": {
+          "scan_interval": "Update-interval (minuten)",
+          "client_id": "energieonderbrekingen client id",
+          "client_secret": "energieonderbrekingen client secret"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "afname": { "name": "Afname status" },
+      "teruglevering": { "name": "Teruglevering status" },
+      "backfeed_risk": { "name": "Terugleverrisico" },
+      "evening_peak_risk": { "name": "Avondpiekrisico" },
+      "interruption": { "name": "Onderbreking" }
+    },
+    "binary_sensor": {
+      "stress_expected": { "name": "Stress verwacht" }
+    }
+  }
+}
