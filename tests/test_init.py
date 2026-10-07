@@ -18,7 +18,7 @@ def test_domain_and_version():
             / "manifest.json"
         ).read_text()
     )
-    assert VERSION == manifest["version"]
+    assert manifest["version"] == VERSION
     assert set(PLATFORMS) == {"sensor", "binary_sensor"}
 
 
