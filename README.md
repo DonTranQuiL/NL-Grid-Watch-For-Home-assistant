@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="custom_components/nl_grid_watch/brand/icon.png" alt="NL Grid Watch" width="160">
+
 # NL Grid Watch
 
 **Dutch grid-stress forecast for Home Assistant — backfeed risk when the sun is up, evening-peak risk when it is not.**
