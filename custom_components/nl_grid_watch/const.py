@@ -2,7 +2,7 @@
 
 DOMAIN = "nl_grid_watch"
 NAME = "NL Grid Watch"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 PLATFORMS = ["sensor", "binary_sensor"]
 
