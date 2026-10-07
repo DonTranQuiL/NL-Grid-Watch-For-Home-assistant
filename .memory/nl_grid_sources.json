@@ -1,0 +1,84 @@
+{
+  "capacity_afname": {
+    "fields": [
+      "OBJECTID",
+      "RNB",
+      "afname",
+      "opwek",
+      "unieke_verzoeken_afname",
+      "unieke_verzoeken_invoeding",
+      "voedingsgebied_id",
+      "voedingsgebied_naam",
+      "wachtrij_afname",
+      "wachtrij_invoeding"
+    ],
+    "http": 200,
+    "missing": [],
+    "reachable": true
+  },
+  "capacity_teruglevering": {
+    "fields": [
+      "OBJECTID",
+      "RNB",
+      "afname",
+      "opwek",
+      "unieke_verzoeken_afname",
+      "unieke_verzoeken_invoeding",
+      "voedingsgebied_id",
+      "voedingsgebied_naam",
+      "wachtrij_afname",
+      "wachtrij_invoeding"
+    ],
+    "http": 200,
+    "missing": [],
+    "reachable": true
+  },
+  "energieonderbrekingen_disruptions": {
+    "http": 401,
+    "missing": [],
+    "reachable": true
+  },
+  "energieonderbrekingen_token": {
+    "http": 401,
+    "missing": [],
+    "reachable": true
+  },
+  "open_meteo": {
+    "fields": [
+      "cloud_cover",
+      "shortwave_radiation",
+      "temperature_2m",
+      "time"
+    ],
+    "http": 200,
+    "missing": [],
+    "reachable": true
+  },
+  "pdok_locatieserver": {
+    "fields": [
+      "bron",
+      "centroide_ll",
+      "centroide_rd",
+      "gemeentecode",
+      "gemeentenaam",
+      "id",
+      "identificatie",
+      "openbareruimte_id",
+      "openbareruimtetype",
+      "postcode",
+      "provincieafkorting",
+      "provinciecode",
+      "provincienaam",
+      "score",
+      "straatnaam",
+      "straatnaam_verkort",
+      "type",
+      "weergavenaam",
+      "woonplaatscode",
+      "woonplaatsnaam"
+    ],
+    "http": 200,
+    "missing": [],
+    "reachable": true
+  }
+}

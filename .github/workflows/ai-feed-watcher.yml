@@ -1,9 +1,18 @@
-name: AI Starter Feed Watcher
+name: AI Grid Feed Watcher
+
+# Daily check of the upstream sources NL Grid Watch depends on: PDOK
+# Locatieserver, the Netbeheer Nederland capacity map (afname/teruglevering),
+# Open-Meteo and energieonderbrekingen.nl. Opens an issue only when a source
+# newly loses a field the integration needs or disappears.
 
 on:
   schedule:
     - cron: "0 3 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: feed-watcher
+  cancel-in-progress: false
 
 jobs:
   schema-audit:
@@ -22,20 +31,14 @@ jobs:
           python-version: "3.12"
 
       - name: Install Dependencies
-        if: hashFiles('ai_engineer/feed_watcher.py') != ''
         run: pip install requests openai
 
-      - name: Run Starter Feed Watcher
-        if: hashFiles('ai_engineer/feed_watcher.py') != ''
+      - name: Run Grid Feed Watcher
         id: watcher
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
         run: python ai_engineer/feed_watcher.py
-
-      - name: Skip when ai_engineer/feed_watcher.py absent
-        if: hashFiles('ai_engineer/feed_watcher.py') == ''
-        run: echo "ai_engineer/feed_watcher.py not present; skipping watcher"
 
       - name: Create Issue
         if: env.SCHEMA_CHANGED == 'true'
@@ -46,10 +49,15 @@ jobs:
           labels: bug, upstream-change, ai-detected
 
       - name: Save API Memory Snapshots
-        if: hashFiles('ai_engineer/feed_watcher.py') != ''
         run: |
-          git config --global user.name "AI Staff Engineer"
-          git config --global user.email "ai@github.com"
-          git add .memory/
-          git commit -m "chore: update starter_feed API baseline" || echo "Memory is already up to date"
+          mkdir -p .memory
+          if [ -z "$(git status --porcelain -- .memory)" ]; then
+            echo "Memory is already up to date"
+            exit 0
+          fi
+          git config user.name "AI Staff Engineer"
+          git config user.email "ai@github.com"
+          git add -- .memory/
+          git commit -m "chore: update NL Grid Watch source baselines [skip ci]" || { echo "Memory is already up to date"; exit 0; }
+          git pull --rebase --quiet || true
           git push
