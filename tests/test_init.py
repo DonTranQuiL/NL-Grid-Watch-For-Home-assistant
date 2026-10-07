@@ -10,7 +10,15 @@ from custom_components.nl_grid_watch.const import DOMAIN, PLATFORMS, VERSION
 
 def test_domain_and_version():
     assert DOMAIN == "nl_grid_watch"
-    assert VERSION == "0.1.3"
+    manifest = json.loads(
+        (
+            Path(__file__).resolve().parents[1]
+            / "custom_components"
+            / "nl_grid_watch"
+            / "manifest.json"
+        ).read_text()
+    )
+    assert VERSION == manifest["version"]
     assert set(PLATFORMS) == {"sensor", "binary_sensor"}
 
 
