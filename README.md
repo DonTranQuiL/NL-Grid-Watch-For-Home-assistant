@@ -22,6 +22,8 @@
 [![Ruff](https://img.shields.io/badge/code%20style-ruff-000000?style=flat-square)](https://github.com/astral-sh/ruff)
 [![Discord](https://img.shields.io/badge/Discord-join-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/qaHPTTKHae)
 [![Ko-fi](https://img.shields.io/badge/buy%20me%20a%20coffee-ko--fi-ff5e5b?style=flat-square&logo=kofi&logoColor=white)](https://ko-fi.com/DonTranQuiL)
+[![Liberapay patrons](https://img.shields.io/liberapay/patrons/Malosaaa.svg?logo=liberapay&style=flat-square)](https://liberapay.com/Malosaaa/donate)
+[![Liberapay goal](https://img.shields.io/liberapay/goal/Malosaaa.svg?logo=liberapay&style=flat-square)](https://liberapay.com/Malosaaa/donate)
 
 [Install](#installation) · [Entities](#entities) · [How it works](#how-the-forecast-works) · [Dashboard](#dashboard-example) · [Automations](#automation-examples) · [Docs site](https://dontranquil.github.io/NL-Grid-Watch-For-Home-assistant/)
 
@@ -219,7 +221,9 @@ Unofficial. Not affiliated with Netbeheer Nederland, TenneT, energieonderbreking
 - Docs: [dontranquil.github.io/NL-Grid-Watch-For-Home-assistant](https://dontranquil.github.io/NL-Grid-Watch-For-Home-assistant/)
 - Issues: [GitHub Issues](https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/issues)
 - Community: [Discord](https://discord.gg/qaHPTTKHae)
-- Tip jar: [Ko-fi](https://ko-fi.com/DonTranQuiL)
+- Tip jar: [Ko-fi](https://ko-fi.com/DonTranQuiL) · [Liberapay](https://liberapay.com/Malosaaa/donate)
+
+<a href="https://ko-fi.com/DonTranQuiL"><img alt="Support me on Ko-fi" src="https://ko-fi.com/img/githubbutton_sm.svg" height="30"></a> <a href="https://liberapay.com/Malosaaa/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a>
 
 ## License
 
