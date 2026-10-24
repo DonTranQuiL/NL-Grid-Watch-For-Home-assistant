@@ -49,11 +49,18 @@
 
 ### HACS (recommended)
 
-Click the **Open in HACS** button above, or add the repository yourself:
+**NL Grid Watch** is submitted to the **HACS default list**, so you can install it straight from the HACS store:
 
-1. HACS → ⋮ → **Custom repositories**
-2. URL: `https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant`, category **Integration**
-3. Download **NL Grid Watch**, then restart Home Assistant
+1. Open **HACS** (or click **Open in HACS** above) in your sidebar and search for **NL Grid Watch**.
+2. Open it and click **Download**.
+3. **Restart Home Assistant.**
+
+<details>
+<summary>Fallback: add as a custom repository</summary>
+
+If NL Grid Watch does not show up in the HACS search (yet), click the three dots (⋮) in the top right of HACS → **Custom repositories**, paste `https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant` with category **Integration**, click **Add**, then continue with step 2.
+
+</details>
 
 ### Manual
 
