@@ -9,7 +9,7 @@
 [![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=DonTranQuiL&repository=NL-Grid-Watch-For-Home-assistant&category=integration)
 
 [![GitHub release](https://img.shields.io/github/v/release/DonTranQuiL/NL-Grid-Watch-For-Home-assistant?style=for-the-badge&color=ffb52e)](https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/releases)
-[![HACS](https://img.shields.io/badge/HACS-Custom-41BDF5?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](https://hacs.xyz)
+[![HACS](https://img.shields.io/badge/HACS-Default-41BDF5?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](https://hacs.xyz)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-2025.1%2B-18BCF2?style=for-the-badge&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/total?style=for-the-badge&color=00b4d8)](https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/releases)
@@ -49,7 +49,7 @@
 
 ### HACS (recommended)
 
-**NL Grid Watch** is submitted to the **HACS default list**, so you can install it straight from the HACS store:
+**NL Grid Watch** is in the **HACS default list**, so no custom repository is needed:
 
 1. Open **HACS** (or click **Open in HACS** above) in your sidebar and search for **NL Grid Watch**.
 2. Open it and click **Download**.
