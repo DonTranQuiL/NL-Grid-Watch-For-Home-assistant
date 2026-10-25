@@ -5,7 +5,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from custom_components.nl_grid_watch.const import DOMAIN, PLATFORMS, VERSION
+from custom_components.nl_grid_watch.const import DOMAIN, PLATFORMS
+
+EXPECTED_VERSION = "1.1.1"
 
 
 def test_domain_and_version():
@@ -16,9 +18,9 @@ def test_domain_and_version():
             / "custom_components"
             / "nl_grid_watch"
             / "manifest.json"
-        ).read_text()
+        ).read_text(encoding="utf-8")
     )
-    assert manifest["version"] == VERSION
+    assert manifest["version"] == EXPECTED_VERSION
     assert set(PLATFORMS) == {"sensor", "binary_sensor"}
 
 
@@ -40,5 +42,5 @@ def test_manifest_urls():
         == "https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/issues"
     )
     assert manifest["config_flow"] is True
-    assert manifest["version"] == VERSION
+    assert manifest["version"] == EXPECTED_VERSION
     assert manifest["domain"] == DOMAIN
