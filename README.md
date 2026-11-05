@@ -6,6 +6,7 @@
 
 **A weather forecast for the Dutch power grid at your postcode: backfeed risk while the sun is up, evening-peak risk once it goes down.**
 
+[![Open your Home Assistant instance and open this repository in the Marketplace.](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=DonTranQuiL&repository=NL-Grid-Watch-For-Home-assistant&category=integration)
 [![Open your Home Assistant instance and open this repository in HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=DonTranQuiL&repository=NL-Grid-Watch-For-Home-assistant&category=integration)
 
 [![GitHub release](https://img.shields.io/github/v/release/DonTranQuiL/NL-Grid-Watch-For-Home-assistant?style=for-the-badge&color=ffb52e)](https://github.com/DonTranQuiL/NL-Grid-Watch-For-Home-assistant/releases)
@@ -47,7 +48,14 @@
 
 ## Installation
 
-### HACS (recommended)
+### Marketplace (Home Assistant 2026.11 and newer, recommended)
+
+[![Open your Home Assistant instance and open this repository in the Marketplace.](https://my.home-assistant.io/badges/marketplace_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=DonTranQuiL&repository=NL-Grid-Watch-For-Home-assistant&category=integration)
+
+1. In Home Assistant, go to **Settings > Marketplace** and search for **NL Grid Watch** (or use the button above).
+2. Open it and select **Install**. The setup starts right away, no restart needed.
+
+### HACS (Home Assistant before 2026.11)
 
 **NL Grid Watch** is in the **HACS default list**, so no custom repository is needed:
 
