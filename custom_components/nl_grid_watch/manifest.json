@@ -1,6 +1,9 @@
 {
   "domain": "nl_grid_watch",
   "name": "NL Grid Watch",
+  "categories": [
+    "energy"
+  ],
   "codeowners": [
     "@DonTranQuiL"
   ],
